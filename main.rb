@@ -1,9 +1,10 @@
 class LinkedList
-attr_accessor :head, :tail
+attr_accessor :head, :tail, :size
 
   def initialize
-    head = nil
-    tail = nil
+    @head = nil
+    @tail = nil
+    @size = 0
   end
 
   def append(value)
@@ -14,6 +15,7 @@ attr_accessor :head, :tail
       self.tail.next_node = new_node if self.tail
     end
     self.tail = new_node
+    self.size += 1
     puts "#{self.tail.value} successfully added to the end of the list"
   end
 
@@ -21,8 +23,19 @@ attr_accessor :head, :tail
     new_node = Node.new(value)
     new_node.next_node = self.head if self.head
     self.head = new_node
+    self.size += 1
     puts "#{self.head.value} successfully added to the head of the list"
   end
+
+  def at(index)
+    puts "the list size is shorter than #{index}" if (index - 1) > self.size
+    current = self.head
+    index.times do
+      current = current.next_node
+    end
+    puts "#{current.value} is the value at index #{index}"
+  end
+
 end
 
 class Node
@@ -38,9 +51,17 @@ end
 
 list = LinkedList.new
 
-list.prepend(5)
 list.append(8)
+list.append(9)
+list.append(12)
+list.prepend(11)
+list.prepend(15)
+
 
 puts "#{list.head.value} is the head of the list and #{list.tail.value} is the tail of the list"
+puts "size of the list is #{list.size}"
+
+list.at(1)
+
 
 
