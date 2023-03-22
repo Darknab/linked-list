@@ -36,6 +36,17 @@ attr_accessor :head, :tail, :size
     puts "#{current.value} is the value at index #{index}"
   end
 
+  def pop
+    current = self.head
+    second_last = self.size - 2
+    second_last.times do
+      current = current.next_node
+    end
+    current.next_node = nil
+    self.tail = current
+    puts "The last value was successfully removed"
+  end 
+
 end
 
 class Node
@@ -62,6 +73,11 @@ puts "#{list.head.value} is the head of the list and #{list.tail.value} is the t
 puts "size of the list is #{list.size}"
 
 list.at(1)
+
+list.pop
+
+puts "#{list.head.value} is the head of the list and #{list.tail.value} is the tail of the list"
+
 
 
 
