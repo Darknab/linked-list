@@ -84,6 +84,56 @@ attr_accessor :head, :tail, :size
     puts result
   end
 
+  def insert_at(value, index)
+    if index > (self.size - 1)
+      puts "index do not exist"
+      return
+    elsif index == 0
+      self.prepend(value)
+      return
+    elsif index == (self.size - 1)
+      self.append(value)
+      return
+    end
+    new_node = Node.new(value)
+    previous_node = self.node_at(index - 1)
+    current_node = self.node_at(index)
+    new_node.next_node = current_node
+    previous_node.next_node = new_node
+    self.size += 1
+    puts "#{new_node.value} was successfully added at index #{index}"
+  end
+
+  def remove_at(index)
+    if index > (self.size - 1)
+      puts "index do not exist"
+      return
+    elsif index == (self.size - 1)
+      self.pop
+      return
+    elsif index == 0
+      current = self.head
+      self.head = current.next_node
+      self.size -= 1
+      return
+    end
+    previous_node = self.node_at(index - 1)
+    current_node = self.node_at(index + 1)
+    previous_node.next_node = current_node
+    self.size -= 1
+    puts "Value was successfully removed from index #{index}"
+  end
+
+  private
+
+  def node_at(index)
+    current = self.head
+    index.times do
+      current = current.next_node
+    end
+    return current
+  end
+
 end
 
 class Node
@@ -117,7 +167,13 @@ puts "#{list.head.value} is the head of the list and #{list.tail.value} is the t
 
 list.to_s
 
-list.find(12)
+list.insert_at(7, 2)
+
+list.to_s
+
+list.remove_at(2)
+
+list.to_s
 
 
 
