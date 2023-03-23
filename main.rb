@@ -149,31 +149,74 @@ end
 
 list = LinkedList.new
 
-list.append(8)
-list.append(9)
-list.append(12)
-list.prepend(11)
-list.prepend(15)
+puts "Please enter a value to add to the new list"
+input = gets.chomp.to_i
+list.append(input)
 
+loop do
+  puts "Please select an action to execute:"
+  puts "* Type 1 to append a value to the end of the list"
+  puts "* Type 2 to prepend a value to the start of the list"
+  puts "* Type 3 to insert a value at a given index of the list"
+  puts "* Type 4 to remove a value from a given index of the list"
+  puts "* Type 5 to show the size of the list"
+  puts "* Type 6 to show the value stored at a given index"
+  puts "* Type 7 to remove the last value from the list"
+  puts "* Type 8 to check if the list contains a given value"
+  puts "* Type 9 to search for a value"
+  puts "* Type 10 to show the complete list"
+  puts "* Type 11 to show the first value in the list"
+  puts "* Type 12 to show the last value in the list"
+  puts "* Type 99 to exit"
 
-puts "#{list.head.value} is the head of the list and #{list.tail.value} is the tail of the list"
-puts "size of the list is #{list.size}"
+  input = gets.chomp.to_i
 
-list.at(1)
-
-list.pop
-
-puts "#{list.head.value} is the head of the list and #{list.tail.value} is the tail of the list"
-
-list.to_s
-
-list.insert_at(7, 2)
-
-list.to_s
-
-list.remove_at(2)
-
-list.to_s
-
-
-
+  case input
+  when 1
+    puts "Enter a value to append:"
+    val = gets.chomp.to_i
+    list.append(val)
+  when 2
+    puts "Enter a value to prepend:"
+    val = gets.chomp.to_i
+    list.prepend(val)
+  when 3
+    puts "Enter a value to add:"
+    val = gets.chomp.to_i
+    puts "Enter the index:"
+    idx = gets.chomp.to_i
+    list.insert_at(val, idx)
+  when 4
+    puts "Enter the index:"
+    idx = gets.chomp.to_i
+    list.remove_at(idx)
+  when 5
+    puts list.size
+  when 6
+    puts "Enter the index:"
+    idx = gets.chomp.to_i
+    list.at(idx)
+  when 7
+    list.pop
+  when 8
+    puts "Enter a value:"
+    val = gets.chomp.to_i
+    if list.contains?(value)
+      puts "#{val} is in the list!"
+    else puts "#{val} is not in the list"
+    end
+  when 9
+    puts "Enter a value to find"
+    val = gets.chomp.to_i
+    list.find(val)
+  when 10
+    list.to_s
+  when 11
+    puts list.head.value
+  when 12
+    puts list.tail.value
+  when 99
+    break
+  else puts "incorrect input"
+  end
+end
