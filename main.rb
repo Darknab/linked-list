@@ -73,6 +73,17 @@ attr_accessor :head, :tail, :size
     puts"Not found"
   end
 
+  def to_s
+    result = ""
+    current  = head
+    result += "(#{current.value}) -> " if head.value
+    while current = current.next_node
+      result += "(#{current.value}) -> "
+    end
+    result += "nil"
+    puts result
+  end
+
 end
 
 class Node
@@ -104,6 +115,9 @@ list.pop
 
 puts "#{list.head.value} is the head of the list and #{list.tail.value} is the tail of the list"
 
+list.to_s
+
+list.find(12)
 
 
 
